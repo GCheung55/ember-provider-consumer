@@ -1,10 +1,6 @@
-import Component from '@ember/component';
-import ProviderConsumerMixin from 'ember-provider-consumer';
 import InputProviderComponent from './input-provider';
-import layout from '../templates/components/input-consumer';
+import ConsumerComponent from 'ember-provider-consumer/components/consumer';
 
-export default Component.extend(ProviderConsumerMixin, {
-  layout,
-
+export default ConsumerComponent.extend({
   providerComponent: InputProviderComponent
 });
