@@ -39,7 +39,16 @@ Usage
 
     ```
 
-3. Use the components! Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
+3. Yield the `provider` in the consumer component's template.
+
+
+```handlebars
+{{! templates/component/example-consumer.hbs }}
+
+{{yield provider}}
+```
+
+4. Use the components! Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
 
     ```handlebars
     {{! example application.hbs }}
