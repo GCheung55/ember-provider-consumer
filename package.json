@@ -1,11 +1,14 @@
 {
   "name": "ember-provider-consumer",
   "version": "0.0.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "A mixin to support the provider pattern in Ember.js, enabling properties to be passed to components without having to pass properties down the whole component tree.",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gcheung55/ember-consumer-provider.git"
+  },
   "license": "MIT",
   "author": "",
   "directories": {
