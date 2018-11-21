@@ -1,7 +1,7 @@
 ember-provider-consumer
 ==============================================================================
 
-[Short description of the addon.]
+A mixin to support the provider pattern in Ember.js, enabling properties to be passed to components without having to pass properties down the whole component tree.
 
 Installation
 ------------------------------------------------------------------------------
@@ -14,8 +14,52 @@ ember install ember-provider-consumer
 Usage
 ------------------------------------------------------------------------------
 
-[Longer description of how to use the addon in apps.]
+1. Create two components, a provider and consumer. The provider component will contain the properties that the consumer component will access.
 
+```
+ember generate component <name-of-provider-component>
+ember generate component <name-of-consumer-component>
+```
+
+2. Import `ember-provider-consumer` mixin and the provider component into the consumer component. Extend the consumer component with the mixin and set the provider component as the `providerComponent` property.
+
+The `providerComponent` will be used to locate the provider component.
+
+```javascript
+import Component from '@ember/component';
+import ProviderConsumerMixin from 'ember-provider-consumer';
+import InputProviderComponent from './input-provider';
+import layout from '../templates/components/input-consumer';
+
+export default Component.extend(ProviderConsumerMixin, {
+  layout,
+
+  providerComponent: InputProviderComponent
+});
+
+```
+
+3. User the components. Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
+
+application.hbs
+
+```handlebars
+{{textarea value=userInput}}
+
+{{#example-provider textInput=userInput}}
+  {{outlet}}
+{{/example-provider}}
+```
+
+index.hbs - rendered inside `application.hbs` outlet.
+
+```handlebars
+{{#example-consumer as | provider |}}
+  <p>
+    {{provider.textInput}}
+  </p>
+{{/example-consumer}}
+```
 
 Contributing
 ------------------------------------------------------------------------------
