@@ -3,6 +3,8 @@ ember-provider-consumer
 
 A mixin to support the provider pattern in Ember.js, enabling properties to be passed to components without having to pass properties down the whole component tree.
 
+Demo: https://ember-twiddle.com/22af9684d040d4c130080ef5c6e3e30f
+
 Installation
 ------------------------------------------------------------------------------
 
