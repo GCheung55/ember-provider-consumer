@@ -16,57 +16,57 @@ Usage
 
 1. Create two components, a provider and consumer. The provider component will contain the properties that the consumer component will access.
 
-```
-ember generate component <name-of-provider-component>
-ember generate component <name-of-consumer-component>
-```
+    ```
+    ember generate component <name-of-provider-component>
+    ember generate component <name-of-consumer-component>
+    ```
 
 2. Import `ember-provider-consumer` mixin and the provider component into the consumer component. Extend the consumer component with the mixin and set the provider component as the `providerComponent` property.
 
-The `providerComponent` will be used to locate the provider component.
+    The `providerComponent` will be used to locate the provider component.
 
-```javascript
-import Component from '@ember/component';
-import ProviderConsumerMixin from 'ember-provider-consumer';
-import InputProviderComponent from './input-provider';
-import layout from '../templates/components/input-consumer';
+    ```javascript
+    import Component from '@ember/component';
+    import ProviderConsumerMixin from 'ember-provider-consumer';
+    import InputProviderComponent from './input-provider';
+    import layout from '../templates/components/input-consumer';
 
-export default Component.extend(ProviderConsumerMixin, {
-  layout,
+    export default Component.extend(ProviderConsumerMixin, {
+      layout,
 
-  providerComponent: InputProviderComponent
-});
+      providerComponent: InputProviderComponent
+    });
 
-```
+    ```
 
 3. User the components. Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
 
-application.hbs
+    ```handlebars
+    {{! application.hbs }}
+    
+    {{textarea value=userInput}}
 
-```handlebars
-{{textarea value=userInput}}
+    {{#example-provider textInput=userInput}}
+      {{outlet}}
+    {{/example-provider}}
+    ```
 
-{{#example-provider textInput=userInput}}
-  {{outlet}}
-{{/example-provider}}
-```
+    ```handlebars
+    {{! index.hbs - rendered inside `application.hbs` outlet }}
 
-index.hbs - rendered inside `application.hbs` outlet.
-
-```handlebars
-{{#example-consumer as | provider |}}
-  <p>
-    {{provider.textInput}}
-  </p>
-{{/example-consumer}}
-```
+    {{#example-consumer as | provider |}}
+      <p>
+        {{provider.textInput}}
+      </p>
+    {{/example-consumer}}
+    ```
 
 Contributing
 ------------------------------------------------------------------------------
 
 ### Installation
 
-* `git clone <repository-url>`
+* `git clone https://github.com/GCheung55/ember-provider-consumer.git`
 * `cd ember-provider-consumer`
 * `yarn install`
 
