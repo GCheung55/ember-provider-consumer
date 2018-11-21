@@ -39,11 +39,11 @@ Usage
 
     ```
 
-3. User the components. Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
+3. Use the components! Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
 
     ```handlebars
-    {{! application.hbs }}
-    
+    {{! example application.hbs }}
+
     {{textarea value=userInput}}
 
     {{#example-provider textInput=userInput}}
@@ -52,7 +52,7 @@ Usage
     ```
 
     ```handlebars
-    {{! index.hbs - rendered inside `application.hbs` outlet }}
+    {{! example index.hbs - rendered inside `application.hbs` outlet, assuming an index route was created }}
 
     {{#example-consumer as | provider |}}
       <p>
