@@ -1,5 +1,11 @@
 {{#input-consumer as | provider |}}
   <p>
-    {{provider.input}}
+    Input-Consumer: {{provider.input}}
   </p>
 {{/input-consumer}}
+
+{{#input-consumer-mixed-in as | provider |}}
+  <p>
+    Input-Consumer-Mixed-In: {{provider.input}}
+  </p>
+{{/input-consumer-mixed-in}}

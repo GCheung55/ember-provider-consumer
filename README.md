@@ -1,7 +1,7 @@
 ember-provider-consumer
 ==============================================================================
 
-A mixin to support the provider pattern in Ember.js, enabling properties to be passed to components without having to pass properties down the whole component tree.
+An addon to support the provider pattern in Ember.js via components, enabling properties to be passed to components without having to pass properties down the whole component tree.
 
 Demo: https://ember-twiddle.com/22af9684d040d4c130080ef5c6e3e30f
 
@@ -18,58 +18,51 @@ Usage
 
 1. Create two components, a provider and consumer. The provider component will contain the properties that the consumer component will access.
 
+    Here we will use `my-provider` and `my-consumer` as an example of the two components.
+
     ```
-    ember generate component <name-of-provider-component>
-    ember generate component <name-of-consumer-component>
+    ember generate component my-provider
+    ember generate component my-consumer
     ```
 
-2. Import `ember-provider-consumer` mixin and the provider component into the consumer component. Extend the consumer component with the mixin and set the provider component as the `providerComponent` property.
+2. Import the `Consumer` component from `ember-provider-consume` and the generated provider component into the generated consumer component.
 
-    The `providerComponent` will be used to locate the provider component.
+    Subclass the `Consumer` component and set the provider component as the `providerComponent` property. The `providerComponent` property will be used to locate the provider component up the component tree.
+
+    **Note** `Consumer` has a `layout` property, aka template, so `my-consumer` does not have the `layout` property defined. `my-consumer` component's corresponding template can be removed.
 
     ```javascript
-    import Component from '@ember/component';
-    import ProviderConsumerMixin from 'ember-provider-consumer';
-    import InputProviderComponent from './input-provider';
-    import layout from '../templates/components/input-consumer';
+    // app/components/my-consumer.js
 
-    export default Component.extend(ProviderConsumerMixin, {
-      layout,
+    import ConsumerComponent from 'ember-provider-consumer';
+    import MyProviderComponent from './my-provider';
 
+    export default Consumer.extend({
       providerComponent: InputProviderComponent
     });
 
     ```
 
-3. Yield the `provider` in the consumer component's template.
-
-
-```handlebars
-{{! templates/component/example-consumer.hbs }}
-
-{{yield provider}}
-```
-
-4. Use the components! Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
+3. Use the components! Any property set on the provider will be availalbe to the consumer, yielded as `provider`. The provider component must be a parent to the consumer component, but the consumer does not have to be a direct descendent.
 
     ```handlebars
     {{! example application.hbs }}
 
     {{textarea value=userInput}}
 
-    {{#example-provider textInput=userInput}}
+    {{#my-provider textInput=userInput}}
       {{outlet}}
-    {{/example-provider}}
+    {{/my-provider}}
     ```
 
     ```handlebars
     {{! example index.hbs - rendered inside `application.hbs` outlet, assuming an index route was created }}
 
-    {{#example-consumer as | provider |}}
+    {{#my-consumer as | provider |}}
       <p>
         {{provider.textInput}}
       </p>
-    {{/example-consumer}}
+    {{/my-consumer}}
     ```
 
 Contributing
